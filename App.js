@@ -11,9 +11,9 @@ export default class App extends Component {
     return (
       <View style={{flex:1,justifyContent:'center',alignContent:'center'}}>
       <StatusBar   
-     backgroundColor = "#b3e6ff"  
-     barStyle = "dark-content"   
-  />  
+     backgroundColor = {'#1d81f0'}  
+     barStyle = "dark-content"  
+      />  
         <Navigation/>
       </View>
     )

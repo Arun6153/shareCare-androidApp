@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {StyleSheet, Text, View ,TextInput , TouchableOpacity } from 'react-native'
+import {StyleSheet, Text, View ,TextInput,Image , TouchableOpacity } from 'react-native'
 
 export default class Login extends Component {
     constructor(props)
@@ -16,7 +16,7 @@ export default class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style = {{fontWeight:'bold', fontSize:40,margin:40,marginBottom:60}}>
+                <Text style = {{fontWeight:'bold', fontSize:30,margin:40,marginBottom:60}}>
                     Share. Camp.
                 </Text>
                 <View style={{width:'80%'}}>
@@ -25,6 +25,11 @@ export default class Login extends Component {
                     <TouchableOpacity onPress={this.homeHandler} style={styles.buttonBox}>
                         <Text style={styles.ButtonText} >Login</Text>
                     </TouchableOpacity>
+                    <View style={{width:'100%',alignItems:'center'}}>
+                        <Text style={{color:'#288cfb' ,fontWeight: 'bold',margin:10}}>Forgot your password.</Text>
+                        <Text style={{fontSize:20,fontWeight:'bold'}}>or</Text>
+                        <Image style={{width:191,height:45,margin:15}} source={require('../Navigation/Assets/google.png')}/>
+                    </View>
                 </View>
                 <View style={styles.loginContent}>
                         <Text onPress={this.signUpHandler} style={{color:'#288cfb' ,fontWeight: 'bold',marginBottom:30}}>Not a member? Sign up here.</Text>

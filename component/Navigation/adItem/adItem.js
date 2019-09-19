@@ -9,7 +9,7 @@ class AdItem extends React.Component {
                     <Text style={{ fontSize: 23, fontWeight: 'bold', alignItems: 'center', padding: 5, width: '100%' }} >Post Ad.</Text>
                 </View>
                 <Text style={{ padding: 16, fontSize: 15, fontWeight: 'bold' }}>Some Categories</Text>
-                <ScrollView bounces={true} style={{ width: '100%', height: 'auto', padding: 5, paddingLeft: 17, paddingRight: 17,}}>
+                <ScrollView bounces={true} contentContainerStyle={{ width: '100%', height: 'auto', padding: 5, paddingLeft: 17, paddingRight: 17,justifyContent:'flex-start',flexWrap:'wrap',flexDirection:'row',paddingBottom:165}}>
                     <View style={{ borderWidth: 1, borderColor: 'black', width:155, margin: 3, padding: 2, height:155,justifyContent: 'center',alignItems:'center'}}>
                         <View><Image style={{ width: 10, height: 10 }} source={require('../Assets/product.jpeg')} /></View>
                         <Text style={{ fontWeight: 'bold', marginBottom: 2 }}>Electronics</Text>
@@ -26,6 +26,31 @@ class AdItem extends React.Component {
                     <View><Image style={{ width: 10, height: 10 }} source={require('../Assets/product.jpeg')} /></View>
                         <Text style={{ fontWeight: 'bold', marginBottom: 2 }}>Books</Text>
                     </View>
+                    <View style={{ borderWidth: 1, borderColor: 'black', width:155, margin: 3, padding: 2, height:155,justifyContent: 'center',alignItems:'center' }}>
+                    <View><Image style={{ width: 10, height: 10 }} source={require('../Assets/product.jpeg')} /></View>
+                        <Text style={{ fontWeight: 'bold', marginBottom: 2 }}>Bikes</Text>
+                    </View>
+                    <View style={{ borderWidth: 1, borderColor: 'black', width:155, margin: 3, padding: 2, height:155,justifyContent: 'center',alignItems:'center' }}>
+                    <View><Image style={{ width: 10, height: 10 }} source={require('../Assets/product.jpeg')} /></View>
+                        <Text style={{ fontWeight: 'bold', marginBottom: 2 }}>Sports</Text>
+                    </View>
+                    <View style={{ borderWidth: 1, borderColor: 'black', width:155, margin: 3, padding: 2, height:155,justifyContent: 'center',alignItems:'center' }}>
+                    <View><Image style={{ width: 10, height: 10 }} source={require('../Assets/product.jpeg')} /></View>
+                        <Text style={{ fontWeight: 'bold', marginBottom: 2 }}>Fashion</Text>
+                    </View>
+                    <View style={{ borderWidth: 1, borderColor: 'black', width:155, margin: 3, padding: 2, height:155,justifyContent: 'center',alignItems:'center' }}>
+                    <View><Image style={{ width: 10, height: 10 }} source={require('../Assets/product.jpeg')} /></View>
+                        <Text style={{ fontWeight: 'bold', marginBottom: 2 }}>Services</Text>
+                    </View>
+                    <View style={{ borderWidth: 1, borderColor: 'black', width:155, margin: 3, padding: 2, height:155,justifyContent: 'center',alignItems:'center' }}>
+                    <View><Image style={{ width: 10, height: 10 }} source={require('../Assets/product.jpeg')} /></View>
+                        <Text style={{ fontWeight: 'bold', marginBottom: 2 }}>Furniture</Text>
+                    </View>
+                    <View style={{ borderWidth: 1, borderColor: 'black', width:155, margin: 3, padding: 2, height:155,justifyContent: 'center',alignItems:'center' }}>
+                    <View><Image style={{ width: 10, height: 10 }} source={require('../Assets/product.jpeg')} /></View>
+                        <Text style={{ fontWeight: 'bold', marginBottom: 2 }}>Property</Text>
+                    </View>
+                    
                 </ScrollView>
 
             </View>
