@@ -1,12 +1,28 @@
 const express = require('express');
-
+const user = require('./../db/models').userModel;
+const product = require('./../db/models').productModel;
 const router=express.Router();
 
-    console.log("hey1");
-    console.log(router);
-    router.get('/', function(req,res){
-        console.log("hey2");
-        res.send('recieved');
-    });
+router.get('/', function(req,res){
+    res.send('recieved');
+});
 
-    module.exports = router;
+router.post('/register', (req,res) => {
+    user.create({
+        Name: req.body.Name,
+        Password : req.body.Password,
+        Email : req.body.Email,
+    })
+    .then(() => {
+        res.end();
+    })
+    .catch((err) => {
+        console.err("Error While adding User: ",err);
+    });
+});
+
+router.get('/login', (req,res) => {
+
+});
+
+module.exports = router;
