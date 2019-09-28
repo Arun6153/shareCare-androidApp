@@ -9,10 +9,12 @@ router.post('/addProduct', (req, res) => {
         Price: req.body.Price,
         Location: req.body.Location,
         ProductType: req.body.ProductType,
-    }).then(() => {
+    })
+    .then(() => {
         res.send("Product Submitted");
         res.end();
-    }).catch((err) => {
+    })
+    .catch((err) => {
         console.log(err);
     });
 });
@@ -21,8 +23,12 @@ router.post('/getProduct', (req, res) => {
     product.find({
         Name: req.body.Name,
     }).then((data) => {
-        console.log(data);
-        res.send('Data is here');
+        if(data.length)
+        {
+            res.send('Data is here');
+            console.log(data);
+        }
+        else res.send('Data not found!');
         res.end();
     }).catch((err) => {
         console.log(err);
