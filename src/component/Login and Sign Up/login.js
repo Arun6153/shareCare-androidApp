@@ -5,45 +5,73 @@ export default class Login extends Component {
         super(props);
         this.state = {
             valueEmail: "",
-            boolEmail: false,
             valuePassword: "",
+            boolEmail: false,
             boolPassword: false,
             EmailCheck:"",
-            PassCheck:""
+            PassCheck :""
         }
     }
-    homeHandler = () => {
-        this.props.navigation.replace('tabs');
+    componentDidMount = () => {
+        let val = JSON.stringify({
+            Email: this.state.valueEmail,
+            Password: this.state.valuePassword
+        });
+        if (this.state.boolEmail && this.state.boolPassword) {
+            console.log(val);
+            fetch('http://192.168.43.186:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: val,
+            }).then((data)=>{
+                return data.json();
+            })
+            .then((data) => {
+                    console.log(data.bool);
+                    if (data.bool) this.props.navigation.replace('tabs');
+                    else if(data.bool === false)
+                    {
+                        this.setState({PassCheck:"*Your email or password is incorrect"});
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
     }
     signUpHandler = () => {
         this.props.navigation.navigate('signUp');
     }
     emailHandler = (val) => {
-        this.setState({ valueEmail: val});
+        this.setState({ valueEmail: val });
     }
     passwordHandler = (val) => {
-        this.setState({ valuePassword: val});
+        this.setState({ valuePassword: val });
     }
-    checkerEmail =()=>{
-        let mail = this.state.valueEmail;
-        console.log("here");
-        if(mail.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/))
-        {
-            this.setState({boolEmail:true,EmailCheck:""});
+    checkerEmail = () => {
+        let  mail = this.state.valueEmail;
+        let bool = !this.state.boolEmail;
+        if (mail.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+            this.state.boolEmail = true;
+            this.setState({ EmailCheck: "" });
+            console.log(this.state.boolEmail);
             this.password.focus();
         }
-        else{
-            this.setState({EmailCheck:"*This email is wrong."});
+        else {
+            this.setState({ EmailCheck: "*This email is wrong." });
         }
     }
-    checkerPassword =()=>{
+    checkerPassword = () => {
         let len = this.state.valuePassword.length;
-        if(!(len >= 8 && len <=16 ))
-        {
-            this.setState({PassCheck:"*Length of password should be in 8-16 character."});   
+        if (!(len >= 8 && len <= 16)) {
+            this.setState({ PassCheck: "*Length of password should be in 8-16 character." });
         }
-        else{
-            this.setState({PassCheck:"", boolPass:true});   
+        else {
+            this.setState({ PassCheck: ""});
+            this.state.boolPassword = true;
+            console.log(this.state.boolPassword);
         }
     }
     render() {
@@ -53,32 +81,32 @@ export default class Login extends Component {
                     Share. Camp.
                 </Text>
                 <Text style={{ marginTop: 2, marginBottom: 60 }}>Share to ur dears with trust.</Text>
-                
+
                 <View style={{ width: '80%' }}>
-                    <TextInput 
+                    <TextInput
                         keyboardType={'email-address'}
                         style={styles.inputLogin}
                         placeholder="Email"
                         value={this.state.valueEmail}
                         onChangeText={this.emailHandler}
-                        onSubmitEditing={this.checkerEmail}
-                     />
-                    <Text style={{marginLeft:10 , color:"red"}}>
+                        onBlur={this.checkerEmail}
+                    />
+                    <Text style={{ marginLeft: 10, color: "red" }}>
                         {this.state.EmailCheck}
                     </Text>
-                    <TextInput 
+                    <TextInput
                         secureTextEntry={true}
                         value={this.state.valuePassword}
                         style={styles.inputLogin}
                         placeholder="Password"
                         onChangeText={this.passwordHandler}
                         ref={(input) => { this.password = input }}
-                        onSubmitEditing={this.checkerPassword}
+                        onBlur={this.checkerPassword}
                     />
-                    <Text style={{margin:0 , color:"red"}}>
+                    <Text style={{ margin: 0, color: "red" }}>
                         {this.state.PassCheck}
                     </Text>
-                    <TouchableOpacity onPress={this.homeHandler} style={styles.buttonBox}>
+                    <TouchableOpacity onPress={this.componentDidMount} style={styles.buttonBox}>
                         <Text style={styles.ButtonText} >Login</Text>
                     </TouchableOpacity>
                     <View style={{ width: '100%', alignItems: 'center' }}>

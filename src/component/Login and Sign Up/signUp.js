@@ -17,9 +17,38 @@ export default class SignUp extends Component {
         }
     }
     homeHandler = () => {
-        this.props.navigation.popToTop();
-        this.props.navigation.navigate('tabs');
-        this.props.navigation.dismiss();
+
+        console.log("in");
+        if (this.state.boolEmail && this.state.boolPassword && this.state.boolCPassword) {
+            console.log("in - 2");
+            fetch('http://192.168.43.186:3000/register',{
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json',
+                },
+                body:JSON.stringify({
+                    Email: this.state.valueEmail,
+                    Password: this.state.valuePassword
+                })
+            })
+            .then((data)=>{
+                return data.json();
+            })
+            .then((data) => {
+                if (data.bool){
+                    this.props.navigation.popToTop();
+                    this.props.navigation.navigate('tabs');
+                    this.props.navigation.dismiss();
+                }
+                else if(data.bool === false)
+                {
+                    this.setState({PassCheck:"*Your email or password is incorrect"});
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        }
     }
     loginHandler = () => {
         this.props.navigation.navigate('login');
@@ -37,9 +66,31 @@ export default class SignUp extends Component {
         let mail = this.state.valueEmail;
         console.log("here");
         if (mail.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/))
-        {
-            this.setState({boolEmail:true,EmailCheck:""});
-            this.password.focus();
+        {   
+            console.log("in fetch");
+            fetch('http://192.168.43.186:3000/check',{
+            method : 'POST',
+            headers:{
+                'Content-Type': " application/json"
+            },
+            body:JSON.stringify({
+                Email:mail,
+            })
+        })
+        .then((data)=>{
+            return data.json();
+        })
+        .then((data)=>{
+            if(data.bool){
+                this.state.boolEmail = true;
+                this.setState({EmailCheck:""});
+                this.password.focus();
+            }
+            else if(!data.bool){
+                this.setState({EmailCheck:"*Email already exists"})};
+        }).catch((error) => {
+            console.error(error);
+        });
         }
         else {
             this.setState({ EmailCheck: "*This email is wrong." });
@@ -51,7 +102,8 @@ export default class SignUp extends Component {
             this.setState({ PassCheck: "*Length of password should be in 8-16 character." });
         }
         else {
-            this.setState({PassCheck:"", boolPass:true});   
+            this.state.boolPassword = true;
+            this.setState({PassCheck:""});   
             this.CPassword.focus();
         }
     }
@@ -62,8 +114,9 @@ export default class SignUp extends Component {
             this.setState({ CPassCheck: "*Re-type your password." });
         }
         else{
+            this.state.boolCPassword= true;
             this.setState({ CPassCheck: "" });
-            this.setState({CPassCheck:"", boolCPass:true});   
+            this.setState({CPassCheck:""});   
         }
     }
     render() {
@@ -83,7 +136,7 @@ export default class SignUp extends Component {
                         placeholder="Email"
                         value={this.state.valueEmail}
                         onChangeText={this.emailHandler}
-                        onSubmitEditing={this.checkerEmail}
+                        onBlur={this.checkerEmail}
                     />
                     <Text style={{ marginLeft: 10, color: "red" }}>
                         {this.state.EmailCheck}
@@ -95,7 +148,7 @@ export default class SignUp extends Component {
                         placeholder="Password"
                         onChangeText={this.passwordHandler}
                         ref={(input) => { this.password = input }}
-                        onSubmitEditing={this.checkerPassword}
+                        onBlur={this.checkerPassword}
                     />
                     <Text style={{ margin: 0, color: "red" }}>
                         {this.state.PassCheck}
@@ -107,7 +160,7 @@ export default class SignUp extends Component {
                         placeholder="Confirm-Password"
                         onChangeText={this.confirmPasswordHandler}
                         ref={(input) => { this.CPassword = input }}
-                        onSubmitEditing={this.checkerConfirmPassword}
+                        onBlur={this.checkerConfirmPassword}
                     />
                     <Text style={{ margin: 0, color: "red" }}>
                         {this.state.CPassCheck}
