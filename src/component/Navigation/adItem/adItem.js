@@ -5,7 +5,7 @@ class AdItem extends React.Component {
     render() {
         return (
             <View>
-                <View style={{ justifyContent: 'flex-start', padding: 15, paddingTop: 35, paddingBottom: 20, width: '100%', height: 'auto', elevation: 5, backgroundColor: 'white' }}>
+                <View style={{ justifyContent: 'flex-start', padding: 15, paddingTop: 20, paddingBottom: 20, width: '100%', height: 'auto', elevation: 5, backgroundColor: 'white' }}>
                     <Text style={{ fontSize: 23, fontWeight: 'bold', alignItems: 'center', padding: 5, width: '100%' }} >Post Ad.</Text>
                 </View>
                 <Text style={{ padding: 16, fontSize: 15, fontWeight: 'bold' }}>Some Categories</Text>

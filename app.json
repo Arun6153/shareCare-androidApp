@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "Share Care",
+    "name": "Share Care extended",
     "slug": "shareCare",
     "privacy": "public",
-    "sdkVersion": "34.0.0",
+    "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android",
@@ -17,15 +17,15 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "androidStatusBar": {
+       "backgroundColor": "#0091ea"
+      },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
     ],
-    "androidStatusBar": {
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
       "supportsTablet": true
     }

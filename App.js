@@ -10,10 +10,8 @@ export default class App extends Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
-        <StatusBar
-          backgroundColor={'#1d81f0'}
-          barStyle="dark-content"
-        />
+        
+        <StatusBar barStyle={'light-content'} translucent={true} />
         <Navigation />
       </View>
     )

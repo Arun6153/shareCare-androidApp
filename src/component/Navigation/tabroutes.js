@@ -4,7 +4,7 @@ import Home from './home/home';
 import Chats from './chats/chat';
 import AdItem from './adItem/adItem';
 import Activity from './activity/activity';
-import Account from './account/account.js';
+import Account from './account/accountRoutes';
 import { createAppContainer } from 'react-navigation';
 import React from 'react';
 

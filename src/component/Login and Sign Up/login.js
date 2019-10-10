@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity ,AsyncStorage } from 'react-native'
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +18,6 @@ export default class Login extends Component {
             Password: this.state.valuePassword
         });
         if (this.state.boolEmail && this.state.boolPassword) {
-            console.log(val);
             fetch('http://192.168.43.186:3000/login', {
                 method: 'POST',
                 headers: {
@@ -29,8 +28,12 @@ export default class Login extends Component {
                 return data.json();
             })
             .then((data) => {
-                    console.log(data.bool);
-                    if (data.bool) this.props.navigation.replace('tabs');
+                    if (data.bool)
+                    { 
+                        
+                    
+                        this.props.navigation.replace('tabs');
+                    }
                     else if(data.bool === false)
                     {
                         this.setState({PassCheck:"*Your email or password is incorrect"});
@@ -52,11 +55,9 @@ export default class Login extends Component {
     }
     checkerEmail = () => {
         let  mail = this.state.valueEmail;
-        let bool = !this.state.boolEmail;
         if (mail.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
             this.state.boolEmail = true;
             this.setState({ EmailCheck: "" });
-            console.log(this.state.boolEmail);
             this.password.focus();
         }
         else {
@@ -75,6 +76,7 @@ export default class Login extends Component {
         }
     }
     render() {
+       
         return (
             <View style={styles.container}>
                 <Text style={{ fontWeight: 'bold', fontSize: 30 }}>

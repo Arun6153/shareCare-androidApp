@@ -10,3 +10,5 @@ npm-debug.*
 web-build/
 web-report/
 sharechatapi/node_modules
+package-lock.json
+yarn-error.log
