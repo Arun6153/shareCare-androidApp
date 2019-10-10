@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, Image ,ScrollView } from 'react-native';
+import { View, Text, Image ,ScrollView ,StyleSheet} from 'react-native';
 
 class AdItem extends React.Component {
     render() {
         return (
             <View>
-                <View style={{ justifyContent: 'flex-start', padding: 15, paddingTop: 20, paddingBottom: 20, width: '100%', height: 'auto', elevation: 5, backgroundColor: 'white' }}>
+                <View style={styles.actionBar}>
                     <Text style={{ fontSize: 23, fontWeight: 'bold', alignItems: 'center', padding: 5, width: '100%' }} >Post Ad.</Text>
                 </View>
                 <Text style={{ padding: 16, fontSize: 15, fontWeight: 'bold' }}>Some Categories</Text>
@@ -57,4 +57,19 @@ class AdItem extends React.Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    actionBar:{
+        padding: 15,
+        paddingTop:21,
+        marginTop:20,
+        width: '100%',
+        height:70,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        elevation: 5,
+        backgroundColor: 'white' 
+    }
+});
+
 export default AdItem;
