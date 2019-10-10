@@ -5,6 +5,9 @@ import Modal from './modal/modal'
 export default class userInfo extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            value:0,
+        };
     }
     cancelAction = (props) => {
         this.props.navigation.pop();
@@ -12,11 +15,30 @@ export default class userInfo extends Component {
     saveAction = (props) => {
         this.props.navigation.pop();
     }
+    changeValueState = (val) =>{
+        console.log("Its entering here with value"+val);
+        this.setState({value:val});
+    }
+    ModalCall = () =>{
+        let val = this.state.value; 
+        console.log(val);
+        if(val == 1)
+        {
+            return (<Modal place={"Enter your phone no."} name={"Phone No"} visible={true} />);
+        }
+        else if(val == 2)
+        {
+            //return <Modal place={"Enter your Email"} name={"Email"} visible={true} />;
+        }
+        else{
+            return (<Modal place={""} name={""} visible={false} />);
+        }
+    }
     render() {
         return (
             <ScrollView bounces={true} contentContainerStyle={styles.container}>
                 <View style={styles.actionBar}>
-                    <Text  style={{ fontWeight: 'bold', flex: 1, fontSize: 16, padding: 5, paddingLeft: 3 }} >CANCEL</Text>
+                    <Text  style={{ fontWeight:'bold', flex: 1, fontSize: 16, padding: 5, paddingLeft: 3 }} >CANCEL</Text>
                     <Text  style={{ fontWeight: 'bold', fontSize: 16, padding: 5, color: 'dodgerblue', paddingRight: 0 }} >SAVE</Text>
                 </View>
 
@@ -42,20 +64,19 @@ export default class userInfo extends Component {
                     <View style={{paddingLeft:15,paddingRight:15,borderBottomWidth: StyleSheet.hairlineWidth}}>
                         <Text style={styles.header1}>Contact Information </Text>
                         <View>
-                            <Text style={{fontSize:13,color:'grey',marginBottom:3}}>Phone no.</Text>
-                            <Text style={styles.tempField}>8607972097</Text>
+                            <Text onPress={()=>{this.changeValueState(1)}} style={{fontSize:13,color:'grey',marginBottom:3}}>Phone no.</Text>
+                            <Text onPress={()=>{this.changeValueState(1)}} style={styles.tempField}>8607972097</Text>
                         </View>
                         <Text style={styles.textNormal}>This is the number for buyers contact , reminders and notifictaion</Text>
 
-                        <View>
+                        <View onPress={()=>this.changeValueState(2)}>
                             <Text style={{fontSize:13,color:'grey',marginBottom:3}}>Email</Text>
                             <Text style={styles.tempField}>sarun6153@gmail.com</Text>
                         </View>
                         <Text style={styles.textNormal}>Did you have verified your email? Its important to allow us for securily communicate with you</Text>
                     </View>
-                    
+                    {this.ModalCall}
                 </View>
-                <Modal place={"Enter your phone no."} name={"Phone No"} visible={true} />
             </ScrollView>
         )
     }
@@ -108,7 +129,7 @@ const styles = StyleSheet.create({
         fontSize:15,
         color:'grey',
         paddingTop:10,
-        paddingBottom:10,
+        paddingBottom:12,
     },
     tempField:{
         borderBottomWidth:1,
